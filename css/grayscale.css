@@ -131,6 +131,20 @@ a:focus {
   background-size: cover;
   -o-background-size: cover;
 }
+
+.travel-intro {
+  display: table;
+  width: 100%;
+  height: auto;
+  padding: 100px 0;
+  text-align: center;
+  color: white;
+  background-color: black;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  background-size: cover;
+  -o-background-size: cover;
+}
 .intro .intro-body {
   display: table-cell;
   vertical-align: middle;
@@ -292,7 +306,7 @@ ul.banner-social-buttons {
 }
 footer {
   padding: 100px 0;
-  background-color: #dddddd;
+  background-color: #6ed3cf;
 }
 footer p {
   margin: 0;
@@ -517,6 +531,6 @@ body {
 .caption2{
   opacity: .4;
   position: absolute;
-  bottom: 8px;
-  right: 100px;
+  top: -100px;
+  right: -225px;
 }
