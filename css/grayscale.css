@@ -306,7 +306,7 @@ ul.banner-social-buttons {
 }
 footer {
   padding: 100px 0;
-  background-color: #6ed3cf;
+  background-color: #151515
 }
 footer p {
   margin: 0;
@@ -533,4 +533,9 @@ body {
   position: absolute;
   top: -100px;
   right: -225px;
+}
+
+.quote{
+  color: black;
+  opacity: .3;
 }
