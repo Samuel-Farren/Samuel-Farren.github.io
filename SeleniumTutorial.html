@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Clean Blog</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Theme CSS -->
+    <link href="css/clean-blog.min.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body>
+
+    <!-- Navigation -->
+
+    <!--
+    <nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+        <div class="container-fluid"> -->
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <!-- <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    Menu <i class="fa fa-bars"></i>
+                </button>
+                <a class="navbar-brand" href="index.html">Selenium Tutorial</a>
+            </div> -->
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <!-- <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="index.html">Intro</a>
+                    </li>
+                    <li>
+                        <a href="about.html">About</a>
+                    </li>
+                    <li>
+                        <a href="post.html">Sample Post</a>
+                    </li>
+                    <li>
+                        <a href="contact.html">Contact</a>
+                    </li>
+                </ul>
+            </div> -->
+            <!-- /.navbar-collapse -->
+        <!-- </div> -->
+        <!-- /.container -->
+    <!-- </nav> -->
+
+    <!-- Page Header -->
+    <!-- Set your background image for this header on the line below. -->
+    <header class="intro-header" style="background-image: url('img/home-bg.jpg')">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    <div class="site-heading">
+                        <h1>WTF is Selenium?</h1>
+                        <hr class="small">
+                        <span class="subheading">Aaron Benson, Livia Stanley, Logan Patiño, Michael Schulz, Sam Farren</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-preview">
+                        <h2 class="post-title">
+                            Table of Contents
+                        </h2>
+                        <p class="post-subtitle">
+                            <ul>
+                                <li><a href="#introduction" >Introduction</a></li>
+                                <li class = "indent"><a href="#Why" >Why Use Selenium?</a></li>
+                                <li class = "indent"><a href="#Who" >Who Uses Selenium?</a></li>
+                                <li class = "indent"><a href="#How" >How Does Selenium Work?</a></li>
+                                <li class = "indent"><a href="#Differences" >What is the Difference Between Selenium WebDriver, RC and IDE?</a></li>
+                                <li><a href="#setup" >Setup</a></li>
+                                <li><a href="#reqs" >Requirements</a></li>
+                                <li><a href="#install" >Installation</a></li>
+                                <li><a href="#PyScript" >Python Example</a></li>
+                                <li><a href="#commands" >Commands And Operations</a></li>
+                            </ul>
+                        </p>
+                </div>
+            </div>
+
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1" id="introduction">
+                <div class="post-preview">
+                        <h2 class="post-title">
+                            Introduction
+                        </h2>
+                        <p class="post-subtitle">
+                            Selenium is simply a tool used to automate web browsers. It is primarily used as an automated User Interface tester, but it can be used for any browser automation task you want! (For example,
+                            automatically entering into an daily online contest.) In this tutorial we will focus on using Selenium as a tool to automate UI testing for web applications.
+                        </p>
+                </div>
+                <hr>
+                <div class="post-preview" id="Why">
+                        <h2 class="post-title">
+                            Why Use Selenium?
+                        </h2>
+                        <p class="post-subtitle">
+                            It is important for all layers of an application to be tested, but unfortunately testing the UI is sometimes forgotten. With Selenium, UI testing can be easily automated in a repeatable way
+                            that is suitable for regression testing.
+
+                            Selenium is also easily customizable to all your testing needs because it can be used in multiple languages and testing platforms, and it can run
+                            in multiple browsers and operating systems. Supported languages include Java, Python, C#, Ruby, and Perl. Supported browsers include Firefox, Internet Explorer, Chrome, Opera, iOS Driver, and Android Driver.
+
+                            Selenium should not be used, however, if the UI of a web application frequently changes or will change soon in the future. If the UI changes, all of the tests might
+                            have to change as well, which defeats the purpose of automating the tests.
+
+                        </p>
+                </div>
+                <hr>
+                <div class="post-preview" id="Who">
+                        <h2 class="post-title">
+                            Who Uses Selenium?
+                        </h2>
+                        <p class="post-subtitle">
+                            Anyone who wants to automate their work in a browser can use Selenium! It is commonly used by quality assurance (QA) engineers or other similar application testers.
+                        </p>
+                </div>
+                <hr>
+                <div class="post-preview" id="How">
+                        <h2 class="post-title">
+                            How Does Selenium Work?
+                        </h2>
+                        <p class="post-subtitle">
+                            When you run a Selenium test, Selenium pulls up a browser window and triggers real events, such as clicking on a button, that could occur in your application.
+                            Therefore, many tests are written as a chain of events that would likely occur if a real user was using your application. The architecture is also quite simple.
+                            The Selenium test written in your specified language sits at the bottom, Selenium WebDriver runs on top of the test and below your specified web browser, and finally
+                            the web application sits at the top.
+                            <div>
+                                <div class="row">
+                                    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                                        <img  src="img/SeleniumPic.png" class="pic"></img>
+                                    </div>
+                                </div>
+                            </div>
+                        </p>
+                </div>
+                <hr>
+                <div class="post-preview">
+                        <h2 class="post-title" id="Differences">
+                            What is the Difference Between Selenium WebDriver, RC and IDE?
+                        </h2>
+                        <p class="post-subtitle">
+                            Selenium has multiple parts, all of which provide different advantages to you as a tester. For this tutorial we will only cover Selenium WebDriver. Selenium WebDriver
+                            allows you to create large suites of tests that can be automated and used for regression testing. It is described as a “collection of language specific bindings to drive a
+                            browser” by the official Selenium documentation, which just means that you can download Selenium for your preferred language to create test files that use Selenium capabilities.
+                            Selenium Remote Control is the ancestor of WebDriver, and is now officially deprecated. Selenium IDE is a lightweight version of WebDriver that allows a tester to write quick scripts
+                            for basic testing or for reproducing a bug. It is a simple Firefox add-on that records all interactions in the browser.
+                        </p>
+                </div>
+                <hr>
+                <div class="post-preview">
+                        <h2 class="post-title" id="setup">
+                            Set Up
+                        </h2>
+                        <p class="post-subtitle">
+                            Selenium Webdriver has APIs available in Java, C#, PHP, Python, Perl, and Ruby. This tutorial will cover the Python version because it is easy to use, well documented, and powerful.
+
+                        </p>
+                </div>
+                <hr>
+                <div class="post-preview">
+                        <h2 class="post-title" id="reqs">
+                            Requirements
+                        </h2>
+                        <p class="post-subtitle">
+                            Browsers: Firefox, Internet Explorer, Chrome, Edge<br>
+                            Python Versions: 2.7+ or 3.5+<br>
+                            Pip: Installation framework for Python (included by default in Python 3.6)
+
+                        </p>
+                </div>
+                <hr>
+                <div class="post-preview">
+                        <h2 class="post-title" id="install">
+                            Installation
+                        </h2>
+                        <p class="post-subtitle">Run:      <code>pip install selenium</code></p>
+                        <p class="post-subtitle">On the command line.  This installs the Python bindings for the Selenium API.</p>
+                        <p class="post-subtitle">Next, install the driver needed to interface with the browser of your choice.  This table contains links to drivers, that were found at <a href="http://selenium-python.readthedocs.io/installation.html">this site.</a></p>
+                        <table class="table table-bordered">
+                            <tbody>
+                              <tr>
+                                <td><a class="link" href="https://sites.google.com/a/chromium.org/chromedriver/downloads">Chrome Driver</a></td>
+                                <td><a class="link" href="https://github.com/mozilla/geckodriver/releases">Firefox Driver</a> </td>
+                                <td><a class="link" href="https://developer.microsoft.com/en-us/microsoft-edge/tools/webdriver/">Edge Driver</a> </td>
+                              </tr>
+                            </tbody>
+                        </table>
+                        <p class="post-subtitle">Make sure that the binary that is downloaded and unzipped is located in your PATH (/usr/bin for Linux)</p>
+
+                </div>
+                <hr>
+                <div class="post-preview">
+                        <h2 class="post-title" id="PyScript">
+                            Sample Python Script
+                        </h2>
+                        <p class="post-subtitle">From here, it is really simple to set up a script.  As an example, we’ll set up a quick script that opens Firefox, navigates to Wikipedia, and searches for IBM.  See the following:</p>
+                            <pre><code>from selenium import webdriver                       #import Python libraries</code>
+<code>from selenium.webdriver.common.keys import Keys</code>
+
+<code>driver = webdriver.Firefox()                          #open webdriver for Firefox</code>
+
+<code>driver.get("https://www.wikipedia.org")               #navigate to wikipedia</code>
+
+<code>elem.driver.find_element_by_id("searchInput")         #find the search box</code>
+
+<code>elem.clear()                                          #clear the search box</code>
+
+<code>elem.send_keys("IBM")                                 #input "IBM" into search box</code>
+
+<code>elem.send_keys(Keys.RETURN)                           #submit the search</code>
+
+<code>driver.close()                                        #close the web driver</code>
+                            </pre>
+                        <p class="post-subtitle">This quick example does not use any assertions, thus performs no testing.  It merely opens Wikipedia and searches for IBM.
+                        When this script is run, it will open Firefox and autofill the form.  From here, you can add testing and automation.
+                        The following sections will describe this in detail.</p>
+                </div>
+                <hr>
+                <p class="post-subtitle"></p>
+                <div class="post-preview">
+                        <h2 class="post-title" id="commands">
+                            Commands and Operations
+                        </h2>
+                        <p class="post-subtitle">The particular syntax for creating your WebDriver implementation depends on the driver you’ve chosen to use. Using the ___ implementation, we create a new instance as follows:</p>
+                        <h4 class="post-title" id="Differences">
+                            Creating a WebDriver Instance
+                        </h4>
+                        <p class="post-subtitle">The particular syntax for creating your WebDriver implementation depends on the driver you’ve chosen to use.
+                            Using the ___ implementation, we create a new instance as follows:</p>
+
+                        <code>driver = webdriver.Firefox()</code>
+                        <br><br>
+                        <h4 class="post-title" id="Differences">
+                            Fetching a Page
+                        </h4>
+                        <p class="post-subtitle">To navigate to a webpage to interact with, we can use the “get” command as follows:</p>
+
+                        <code>driver.get(“http://www.seleniumhq.org”)</code>
+                        <p class="post-subtitle">The above line takes the driver to the Selenium homepage.</p>
+
+
+                </div>
+
+
+
+
+                <!-- Pager -->
+                <!-- <ul class="pager">
+                    <li class="next">
+                        <a href="#">Older Posts &rarr;</a>
+                    </li>
+                </ul> -->
+            </div>
+        </div>
+    </div>
+
+    <hr>
+
+    <!-- Footer -->
+    <!-- <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    <ul class="list-inline text-center">
+                        <li>
+                            <a href="#">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                    </ul>
+                    <p class="copyright text-muted">Copyright &copy; Your Website 2016</p>
+                </div>
+            </div>
+        </div>
+    </footer> -->
+
+    <!-- jQuery -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+
+    <!-- Contact Form JavaScript -->
+    <script src="js/jqBootstrapValidation.js"></script>
+    <script src="js/contact_me.js"></script>
+
+    <!-- Theme JavaScript -->
+    <script src="js/clean-blog.min.js"></script>
+
+</body>
+
+</html>
