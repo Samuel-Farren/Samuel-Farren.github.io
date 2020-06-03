@@ -103,8 +103,14 @@
                                 <li><a href="#setup" >Setup</a></li>
                                 <li><a href="#reqs" >Requirements</a></li>
                                 <li><a href="#install" >Installation</a></li>
-                                <li><a href="#PyScript" >Python Example</a></li>
                                 <li><a href="#commands" >Commands And Operations</a></li>
+                                <li class = "indent"><a href="#instantiate" >Instantiating a WebDriver</a></li>
+                                <li class = "indent"><a href="#navigate">Navigating to a Webpage</a></li>
+                                <li class = "indent"><a href="#locate">Locating Elements on a Page</a></li>
+                                <li class = "indent"><a href="#interact">Interacting with Elements</a></li>
+                                <li class = "indent"><a href="#assert">Asserting Values on a Page</a></li>
+                                <li class = "indent"><a href="#wait">Aside: Waits</a></li>
+								<li><a href="#unittest" >Unit Testing</a></li>
                             </ul>
                         </p>
                 </div>
@@ -222,57 +228,325 @@
                 </div>
                 <hr>
                 <div class="post-preview">
-                        <h2 class="post-title" id="PyScript">
-                            Sample Python Script
-                        </h2>
-                        <p class="post-subtitle">From here, it is really simple to set up a script.  As an example, we’ll set up a quick script that opens Firefox, navigates to Wikipedia, and searches for IBM.  See the following:</p>
-                            <pre><code>from selenium import webdriver                       #import Python libraries</code>
-<code>from selenium.webdriver.common.keys import Keys</code>
-
-<code>driver = webdriver.Firefox()                          #open webdriver for Firefox</code>
-
-<code>driver.get("https://www.wikipedia.org")               #navigate to wikipedia</code>
-
-<code>elem.driver.find_element_by_id("searchInput")         #find the search box</code>
-
-<code>elem.clear()                                          #clear the search box</code>
-
-<code>elem.send_keys("IBM")                                 #input "IBM" into search box</code>
-
-<code>elem.send_keys(Keys.RETURN)                           #submit the search</code>
-
-<code>driver.close()                                        #close the web driver</code>
-                            </pre>
-                        <p class="post-subtitle">This quick example does not use any assertions, thus performs no testing.  It merely opens Wikipedia and searches for IBM.
-                        When this script is run, it will open Firefox and autofill the form.  From here, you can add testing and automation.
-                        The following sections will describe this in detail.</p>
-                </div>
-                <hr>
-                <p class="post-subtitle"></p>
-                <div class="post-preview">
                         <h2 class="post-title" id="commands">
                             Commands and Operations
                         </h2>
-                        <p class="post-subtitle">The particular syntax for creating your WebDriver implementation depends on the driver you’ve chosen to use. Using the ___ implementation, we create a new instance as follows:</p>
-                        <h4 class="post-title" id="Differences">
-                            Creating a WebDriver Instance
+                        <p class="post-subtitle">
+                            From here, we will run through an example Python script to demonstrate some of the capabilities of Selenium. At a high level, the example will navigate to IBM’s Wikipedia page in Firefox and perform some tests there. The full code can be seen below:
+                        </p>
+                        <pre>
+<code>from selenium import webdriver                          # import Python libraries</code>
+<code>from selenium.webdriver.common.keys import Keys</code>
+
+<code>driver = webdriver.Firefox()                            # open webdriver for Firefox</code>
+
+<code>driver.implicitly_wait(10)                              # set max wait period for driver</code>
+
+<code>driver.get("https://www.wikipedia.org")                 # navigate to Wikipedia</code>
+
+<code>elem = driver.find_element_by_id("searchInput")         # find the search box</code>
+<code>elem.clear()                                            # clear the search box</code>
+
+<code>elem.send_keys("IBM")                                   # input "IBM" into the search box</code>
+
+<code>elem.send_keys(Keys.RETURN)                             # submit the search</code>
+
+<code># get all section title elements</code>
+<code>title_list = driver.find_elements_by_class_name("mw-headline")</code>
+
+<code># all expected section titles specific to this article</code>
+<code>expected_titles = ["History", "Headquarters and offices",
+    "Products and services", "Research",
+    "Brand and reputation", "People and culture",
+    "Employees", "IBM alumni", "Board and shareholders"]</code>
+
+<code># checking that titles are what we expect</code>
+<code>for title, expected_title in zip(title_list, expected_titles):</code>
+<code>    assert title.text == expected_title</code>
+
+<code>driver.close()                                          # close the webdriver</code>
+                        </pre>
+                        <p class="post-subtitle">
+                            We will now go back and explain each section in more detail to understand what’s going on.
+                        </p>
+                        <h4 class="post-title" id="instantiate">
+                            Instantiating a WebDriver
                         </h4>
-                        <p class="post-subtitle">The particular syntax for creating your WebDriver implementation depends on the driver you’ve chosen to use.
-                            Using the ___ implementation, we create a new instance as follows:</p>
-
-                        <code>driver = webdriver.Firefox()</code>
-                        <br><br>
-                        <h4 class="post-title" id="Differences">
-                            Fetching a Page
+                        <p class="post-subtitle">
+                            <code>driver = webdriver.Firefox()</code>
+                        </p>
+                        <p class="post-subtitle">
+                            The first thing we need to do is create an instance of the WebDriver to use throughout our script and control the browser. As mentioned in the setup section, there are multiple different driver implementations corresponding to the many popular browsers.
+                        </p>
+                        <p class="post-subtitle">
+                            In this section of our script, we use the Firefox driver, but the syntax is very similar for the alternatives. More details can be found <a class="link" href="http://www.seleniumhq.org/docs/03_webdriver.jsp#selenium-webdriver-s-drivers">here</a>.
+                        </p>
+                        <h4 class="post-title" id="navigate">
+                            Navigating to a Webpage
                         </h4>
-                        <p class="post-subtitle">To navigate to a webpage to interact with, we can use the “get” command as follows:</p>
+                        <p class="post-subtitle">
+                            <code>driver.get("https://www.wikipedia.org")</code>
+                        </p>
+                        <p class="post-subtitle">
+                            Once we have a driver, we must actually open the desired page in the browser. This can be done with the simple line above, which takes us to the Wikipedia homepage.
+                        </p>
+                        <h4 class="post-title" id="locate">
+                            Locating Elements on a Page
+                        </h4>
+                        <p class="post-subtitle">
+                            Selenium offers many commands to locate elements, each of which is a combination of two factors: what we use to locate elements and whether or not we want to get more than one.
+                        </p>
+                        <p class="post-subtitle">
+                            We can search for elements on a page using the following attributes:
+                            <ul>
+                                <li>ID</li>
+                                <li>Class name</li>
+                                <li>Tag name</li>
+                                <li>Name</li>
+                                <li>Link text</li>
+                                <li>Partial link text</li>
+                                <li>CSS</li>
+                                <li>XPath</li>
+                            </ul>
+                        </p>
+                        <p class="post-subtitle">
+                            Looking at the first example of this in our code, we see that the method clearly uses an ID as the search query, which in this case is “searchInput”.
+                        </p>
+                        <p class="post-subtitle">
+                            <code>elem = driver.find_element_by_id("searchInput")</code>
+                        </p>
+                        <p class="post-subtitle">
+                            The next factor to locating elements is how many we would like to return. In the line of code above, we return a single element, which can be seen by the use of the singular “find element” in the method call. In this next line, we instead get a list of matching elements, this time searching by class name. Note the plural form of the method:
+                        </p>
+                        <p class="post-subtitle">
+                            <code>title_list = driver.find_elements_by_class_name("mw-headline")</code>
+                        </p>
+                        <p class="post-subtitle">
+                            It’s important to note that if a singular locator method is used but multiple elements on the page would be returned, the method will return the first match. More syntax details can be found <a class="link" href="http://www.seleniumhq.org/docs/03_webdriver.jsp#selenium-webdriver-api-commands-and-operations">here</a>.
+                        </p>
+                        <h4 class="post-title" id="interact">
+                            Interacting with Elements
+                        </h4>
+                        <p class="post-subtitle">
+                            Once we have a reference to an element on a page, we most likely want to perform some actions with it. Let’s look at some cases of this in the example:
+                        </p>
+                        <pre>
+<code>elem = driver.find_element_by_id("searchInput")         # find the search box</code>
+<code>elem.clear()                                            # clear the search box</code>
 
-                        <code>driver.get(“http://www.seleniumhq.org”)</code>
-                        <p class="post-subtitle">The above line takes the driver to the Selenium homepage.</p>
+<code>elem.send_keys("IBM")                                   # input "IBM" into the search box</code>
 
+<code>elem.send_keys(Keys.RETURN)                             # submit the search</code>
+                        </pre>
+                        <p class="post-subtitle">
+                            The “elem” variable is a reference to the search box on the Wikipedia homepage.
+                        </p>
+                        <p class="post-subtitle">
+                            We first clear the search box on the second line to prepare for our input. The last two lines are where we then apply our own input using the send_keys() method to interact with text boxes. We first straightforwardly enter the search query “IBM”, and then simulate pressing the enter key to submit the search using an enum in Selenium’s Keys class. After this line, the browser should be at IBM’s Wikipedia page.
+                        </p>
+                        <h4 class="post-title" id="assert">
+                            Asserting Values on a Page
+                        </h4>
+                        <p class="post-subtitle">
+                            At this point, we’re a little over halfway through the example code, shown again here for reference:
+                        </p>
+                        <pre>
+<code>from selenium import webdriver                          # import Python libraries</code>
+<code>from selenium.webdriver.common.keys import Keys</code>
 
+<code>driver = webdriver.Firefox()                            # open webdriver for Firefox</code>
+
+<code>driver.implicitly_wait(10)                              # set max wait period for driver</code>
+
+<code>driver.get("https://www.wikipedia.org")                 # navigate to Wikipedia</code>
+
+<code>elem = driver.find_element_by_id("searchInput")         # find the search box</code>
+<code>elem.clear()                                            # clear the search box</code>
+
+<code>elem.send_keys("IBM")                                   # input "IBM" into the search box</code>
+
+<code>elem.send_keys(Keys.RETURN)                             # submit the search</code>
+
+<code># get all section title elements</code>
+<code>title_list = driver.find_elements_by_class_name("mw-headline")</code>
+
+<code># all expected section titles specific to this article</code>
+<code>expected_titles = ["History", "Headquarters and offices",
+    "Products and services", "Research",
+    "Brand and reputation", "People and culture",
+    "Employees", "IBM alumni", "Board and shareholders"]</code>
+
+<code># checking that titles are what we expect</code>
+<code>for title, expected_title in zip(title_list, expected_titles):</code>
+<code>    assert title.text == expected_title</code>
+
+<code>driver.close()                                          # close the webdriver</code>
+                        </pre>
+                        <p class="post-subtitle">
+                            We’ve explained that the line initializing title_list gets a list of all elements on a page with the class name “mw-headline”. In the context of our example, we are grabbing a list of all of the section titles on IBM’s Wikipedia page. We will now use those elements to do some testing.
+                        </p>
+                        <p class="post-subtitle">
+                            For this example, we’ll perform a simple test to make sure that the section titles specific to this page are written properly. This code snippet is below.
+                        </p>
+                        <pre>
+<code># checking that titles are what we expect</code>
+<code>for title, expected_title in zip(title_list, expected_titles):</code>
+<code>    assert title.text == expected_title</code>
+                        </pre>
+                        <p class="post-subtitle">
+                            At the top, we create a list of our expected titles. The for loop then loops through the expected and actual lists simultaneously, asserting that the text is equal. If the code runs with no errors, the titles are correct!
+                        </p>
+                        <p class="post-subtitle">
+                            It’s important to note a couple things about the assert statement. The first is that this is the built-in assert statement for Python. Selenium is often used for UI testing, but it does not come with testing methods, leaving the tester to incorporate any testing framework they desire. Second is that the text is extracted from the title elements by using the “.text” syntax. Other properties of web elements that can be extracted can be found <a class="link" href="https://seleniumhq.github.io/selenium/docs/api/py/webdriver_remote/selenium.webdriver.remote.webelement.html#module-selenium.webdriver.remote.webelement">here</a>.
+                        </p>
+                        <h4 class="post-title" id="wait">
+                            Aside: Waits
+                        </h4>
+                        <p class="post-subtitle">
+                            <code>driver.implicitly_wait(10)</code>
+                        </p>
+                        <p class="post-subtitle">
+                            You may have noticed that we skipped over a lie of the full code example, shown above. This line implements a wait, which is an important concept in Selenium. In short, waits are used to allow elements on the page to load completely before we access them, so that no unexpected behavior occurs. Selenium has two types of waits: implicit and explicit.
+                        </p>
+                        <p class="post-subtitle">
+                            Implicit waits are simpler to implement, and it’s what we use in the example. To use this, we set an implicit waiting time for the driver after instantiation using the implicitly_wait() method. The one argument is a number of seconds. For the life of the driver, or until this is overwritten, all actions performed on the page will wait up to the specified amount of time for the page to load. If the page takes too long to load, a timeout exception will be raised.
+                        </p>
+                        <p class="post-subtitle">
+                            Explicit waits are slightly more complicated to implement, but they offer a bit more in terms of flexibility and allow us to wait only when we want to. To demonstrate, here is the first element locator of the full example rewritten to use an explicit wait, along with the new required imports:
+                        </p>
+                        <pre>
+<code>from selenium import webdriver</code>
+<code>from selenium.webdriver.common.by import By</code>
+<code>from selenium.webdriver.support.ui import WebDriverWait</code>
+<code>from selenium.webdriver.support import expected_conditions as EC</code>
+
+<code>driver = webdriver.Firefox()</code>
+
+<code>        .</code>
+<code>        .        # skipping intermediate code</code>
+<code>        .</code>
+
+<code>wait = WebDriverWait(driver, 10)</code>
+<code>title_list = wait.until(EC.presence_of_element_located((By.ID, "searchInput")))</code>
+                        </pre>
+                        <p class="post-subtitle">
+                            In this implementation, we specify a WebDriverWait object, which sets the maximum waiting time for the action to be performed. Inside the until clause, we put the expected condition (EC) that will break out of the waiting loop. There are multiple expected conditions defined by Selenium, which can be found <a class="link" href="https://seleniumhq.github.io/selenium/docs/api/py/webdriver_support/selenium.webdriver.support.expected_conditions.html">here</a>. The expected condition takes a locator as an argument, which in this case is a tuple equivalent to finding an element with the ID of “searchInput”.
+                        </p>
+                        <p class="post-subtitle">
+                            More details about waits can be found <a class="link" href="http://www.seleniumhq.org/docs/04_webdriver_advanced.jsp">here</a>.
+                        </p>
+                        <h4 class="post-title" id="wait">
+                            Small Side Idea: Scraping Dynamic Webistes
+                        </h4>
+                        <p class="post-subtitle">
+                            The use of waits come in very handy for many reasons, but one of these specifically is you can also use them to scrape dynamic web sites. If you just use a get on a dynamic website then
+                            read in the page source, a lot of the tags probably won't be loaded from javascript yet. In order to get around this, as mentioned above, you wait for an element to be present then grab it.
+                            This is a very easy and straightforward way as opposed to your other option which is trying to reverse engineer javascript code to figure out how it's loading the content.
+                        </p>
                 </div>
 
+				<hr>
+                <div class="post-preview">
+                        <h2 class="post-title" id="unittest">
+                            Unit Testing
+                        </h2>
+                        <p class="post-subtitle">
+                            Selenium can easily be used for unit testing web applications. The following python script executes three unit test cases for a <a class="link" href="https://webqr.com">web application that analyzes QR codes</a>:
+
+                        </p>
+                </div>
+
+				<pre>
+<code># Example Selenium test script for QR Scanner (https://webqr.com)</code>
+<code># The first two test cases should pass but the last should fail</code>
+
+<code>from selenium import webdriver                                            # import Python libraries</code>
+<code>from selenium.webdriver.common.keys import Keys</code>
+<code>import unittest</code>
+
+<code>class UnitTestQRScanner(unittest.TestCase):</code>
+<code>    def setUp(self):</code>
+<code>        self.driver = webdriver.Firefox()                                 # open webdriver for Firefox</code>
+<code>        self.driver._is_remote = False                                    # fix for bug in webdriver</code>
+<code>        self.driver.implicitly_wait(10)                                   # set max wait period for driver</code>
+
+<code>    def test_QRScannerGoogle(self):</code>
+<code>        driver = self.driver</code>
+<code>        driver.get("https://webqr.com")                                   # navigate to QR Code scanner</code>
+
+<code>        elem = driver.find_element_by_id("qrimg")                         # find upload button</code>
+<code>        elem.click()                                                      # click upload button</code>
+
+<code>        qr_img_directory_1 = r"C:\PATH\TO\qrgoogle.png"                   # set image upload directory</code>
+<code>        elem_upload = driver.find_element_by_css_selector("input[type='file']")   # find qr upload</code>
+<code>        elem_upload.send_keys(qr_img_directory_1)                         # send image to upload section</code>
+
+<code>        expected_response = "https://google.com/"</code>
+<code>        response = driver.find_element_by_xpath("//div[@id='result']//b") # get the response address</code>
+<code>        self.assertTrue(response.text == expected_response)               # assert</code>
+
+<code>    def test_QRScannerLinkedIn(self):</code>
+<code>        driver = self.driver</code>
+<code>        driver.get("https://webqr.com")                                   # navigate to QR Code scanner</code>
+
+<code>        elem = driver.find_element_by_id("qrimg")                         # find upload button</code>
+<code>        elem.click()                                                      # click upload button</code>
+
+<code>        qr_img_directory_1 = r"C:\PATH\TO\qrlinkedin.png"                 # set image upload directory</code>
+<code>        elem_upload = driver.find_element_by_css_selector("input[type='file']")   # find qr upload</code>
+<code>        elem_upload.send_keys(qr_img_directory_1)                         # send image to upload section</code>
+
+<code>        expected_response = "https://linkedin.com/feed"</code>
+<code>        response = driver.find_element_by_xpath("//div[@id='result']//b") # get the response address</code>
+<code>        self.assertEqual(response.text, expected_response)                # assert</code>
+
+<code>    def test_QRScannerHuffingtonPost(self):                               # THIS TEST CASE SHOULD FAIL</code>
+<code>        driver = self.driver</code>
+<code>        driver.get("https://webqr.com")                                   # navigate to QR Code scanner</code>
+
+<code>        elem = driver.find_element_by_id("qrimg")                         # find upload button </code>
+<code>        elem.click()                                                      # click upload button</code>
+
+<code>        qr_img_directory_1 = r"C:\PATH\TO\qrnewyorktimes.png"             # set image upload directory</code>
+<code>        elem_upload = driver.find_element_by_css_selector("input[type='file']")   # find qr upload</code>
+<code>        elem_upload.send_keys(qr_img_directory_1)                         # send image to upload section</code>
+
+<code>        expected_response = "http://www.huffingtonpost.com/"</code>
+<code>        response = driver.find_element_by_xpath("//div[@id='result']//b") # get the response address</code>
+<code>        self.assertEqual(response.text, expected_response)                # assert</code>
+
+<code>    def tearDown(self):</code>
+<code>        self.driver.quit()</code>
+
+<code>if __name__ == "__main__":</code>
+<code>    unittest.main()                                                       # start testing QR scanner</code>
+                        </pre>
+
+						<p class="post-subtitle">
+							This script subclasses unittest.TestCase which keeps track of the results of the three test cases. Subclassing TestCase allows each test case to be run independently so that if any errors occur, the execution of other cases will be unaffected. TestCase does this by calling setUp() and tearDown() for each case. Also, TestCase provides thorough documentation for test cases that fail.
+                        </p>
+						<p class="post-subtitle">
+							The first two test cases in this script test that the QR Scanner web application properly scans the QR codes and outputs the proper web address for each. The last test case for Huffington Post will return false because it has been provided a QR code for the New York Times. The output can be seen here:
+							<div>
+                                <div class="row">
+
+                                        <img  src="img/output.png" class="pic"></img>
+                                </div>
+                            </div>
+						</p>
+                        <div class="post-preview" id="Uses">
+                        <h2 class="post-title">
+                            Other Use Cases
+                        </h2>
+                        <p class="post-subtitle">
+                            You can imagine all of the different scenarios where Selenium would be useful to test your UI. You may have a Web Application with a login and registration page and want to
+                            make sure users can successfully create accounts and login to them.  Maybe you want to test access to specific areas of a web page where a non premium user tries to access a
+                            section that is only available to premium users. Another use could be to test different form inputs to make sure validation is working correctly. Have Selenium give the form
+                            invalid text, then make sure it returns the same form back to you thus ensuring form validation is working correctly. Selenium can be used for a number of use cases and these
+                            are just a fraction of what can be automated. 
+                        </p>
+
+                        </div>
 
 
 
