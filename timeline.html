@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Sam Farren Landing Page</title>
+    <title>Life Timeline</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -23,6 +23,7 @@
 
     <!-- Theme CSS -->
     <link href="css/grayscale.css" rel="stylesheet">
+    <link href="css/timeline.css" rel="stylesheet">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -55,10 +56,10 @@
                         <a href="#page-top"></a>
                     </li>
                     <li>
-                        <a class="page-scroll" href="#">About</a>
+                        <a class="page-scroll" href="index.html">About</a>
                     </li>
                     <li>
-                        <a class="page-scroll" href="timeline.html">Life Timeline</a>
+                        <a class="page-scroll" href="">Life Timeline</a>
                     </li>
                     <li>
                         <a class="page-scroll" href="#contact">Contact</a>
@@ -71,58 +72,57 @@
     </nav>
 
     <!-- Intro Header -->
-    <header class="intro">
-        <div class="intro-body">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-8 col-md-offset-2">
-                        <h1 class="brand-heading">Sam Farren</h1>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-8 col-md-offset-2">
-                      <section class="cd-intro">
-                        <h1 class="cd-headline letters type">
-                          <span class="fa fa-terminal fa-lg"></span>
-                          <span class="cd-words-wrapper">
-                            <b class="is-visible">Learner</b>
-                            <b>Futurist</b>
-                            <b>Adventurer</b>
-                            <b>Ideator</b>
-                          </span>
-                        </h1>
-                      </section>
-                    </div>
-                </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <img id="bitpic" src = "img/BitmojiThumbsUp.png"></img>
             </div>
         </div>
-    </header>
-    <!-- Contact Section -->
-    
+    </div>
 
-    <!-- Footer -->
-    <footer>
-        <section id="contact" class="content-section text-center">
-            <div class="row">
-                <div class="col-lg-8 col-lg-offset-2">
-                    <h2>Get in Contact</h2>
-                    <p>Feel free to email me if you want my resume or if you just want to get in contact!</p>
-                    </p>
-                    <ul class="list-inline banner-social-buttons">
-                      <li>
-                          <a href="mailto:farren.19@osu.edu" class="btn btn-default btn-lg"><i class="fa fa-envelope fa-fw"></i> <span class="network-name">Email</span></a>
-                      </li>
-                        <li>
-                            <a href="https://www.github.com/Samuel-Farren" class="btn btn-default btn-lg"><i class="fa fa-github fa-fw"></i> <span class="network-name">Github</span></a>
-                        </li>
-                        <li>
-                            <a href="https://www.linkedin.com/in/samuel-farren" class="btn btn-default btn-lg"><i class="fa fa-linkedin fa-fw"></i> <span class="network-name">LinkedIn</span></a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </section>
-    </footer>
+    <div id="timeline-content">
+        <h1>Life Timeline</h1>
+      
+        <ul class="timeline">
+          <li class="event" data-date="2013">
+            <h3>Started School at The Ohio State University</h3>
+            <p>Major: Business & Information Systems</p>
+          </li>
+          <li class="event" data-date="2014">
+            <h3>Switched majors to Computer Science and Engineering</h3>
+            <p>Yay Coding!</p>    
+          </li>
+          <li class="event" id="date" data-date="2016">
+            <h3>Discovered my passion for Data Science and Machine Learning</h3>
+            <p>Here come the robots</p>    
+          </li>
+          <li class="event" data-date="May 2017">
+            <h3>Graduated from The Ohio State University</h3>
+            <p>B.S. in Computer Science and Engineering</p>
+          </li>
+          <li class="event" data-date="October 2017">
+            <h3>Started a job at PNC Financial Services</h3>
+            <p>I was part of their Corporate and Institutional Banking Innovations team.</p>
+            <p>Year 1: Web Development - Implementing various mapping needs for 
+                Relationship Managers to more efficiently Propsect potential Clients</p>
+            <p>Technologies used: Angular, Spring, SQL Databases, Google Maps</p>
+          </li>
+          <li class="event" data-date="September 2018">
+            <h3>Transitioned to Machine Learning projects at PNC</h3>
+            <p>The first project was in Healthcare which consisted of predicting Claim Denials</p>
+            <p>Technologies used: Sklearn, Pandas, Keras, Git, Flask</p>
+            <p>Skills Learned: Data Sourcing, Data cleaning, Feature Engineering, Modeling, API Development, Web Scraping</p>
+          </li>
+          <li class="event" data-date="May 2020">
+            <h3>Started a job at the University of Dayton Research Institute</h3>
+            <p>Worked on various Computer Vision projects associated with the Air Force Research Lab</p>
+          </li>
+        </ul>
+      </div>
+
+
+
 
     <!-- jQuery -->
     <script src="vendor/jquery/jquery.js"></script>
